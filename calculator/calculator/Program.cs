@@ -7,22 +7,26 @@ namespace calc
     {
         public static void Main(string[] args)
         {
-            var number1 = ReadNumber(out var isSuccess);
-            if (isSuccess)
+            double number1;
+            double number2;
+            char action;
+            
+            for (int i = 0;; i++)
             {
-                var action = ReadOperator(out var isSuccessChar);
-                if (isSuccessChar)
-                {
-                    var number2 = ReadNumber(out var isSuccess2);
-                    if (isSuccess2)
-                    {
-                        Calc(number1, number2, action);
-                    }
-                    else Console.WriteLine("Я упал");
-                }
-                else Console.WriteLine("Я упал");
+                number1 = ReadNumber(out var isSuccess);
+                if (isSuccess) break;
             }
-            else Console.WriteLine("Я упал");
+            for (int i = 0;; i++)
+            {
+                action = ReadAction(out var isSuccessChar);
+                if (isSuccessChar) break;
+            }
+            for (int i = 0;; i++)
+            {
+                number2 = ReadNumber(out var isSuccess2);
+                if (isSuccess2) break;
+            }
+            Calc(number1, number2, action);
         }
 
         public static double ReadNumber(out bool isSuccess)
@@ -40,7 +44,7 @@ namespace calc
                 return 0;
             }
         }
-            public static char ReadOperator(out bool isSuccess)
+            public static char ReadAction(out bool isSuccess)
         {
             Console.WriteLine("Введите оператор: +-/*");
             var str = Console.ReadLine();
@@ -69,16 +73,14 @@ namespace calc
             {
                 Console.WriteLine("Результат: " + number1 * number2);
             }
+            
+            else if (action == '/' && number2 == 0)
+            {
+                Console.WriteLine("Нельзя делить на ноль");
+            }
             else if (action == '/')
             {
-                try
-                {
-                    Console.WriteLine("Результат: " + number1 / number2);
-                }
-                catch
-                {
-                    Console.WriteLine("Нельзя делить на ноль");
-                }
+                Console.WriteLine("Результат: " + number1 / number2);
             }
             else Console.WriteLine("Я упал");
         }
