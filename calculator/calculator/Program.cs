@@ -10,23 +10,30 @@ namespace calc
             double number1;
             double number2;
             char action;
-            
-            for (int i = 0;; i++)
+
+            while (true)
             {
-                number1 = ReadNumber(out var isSuccess);
-                if (isSuccess) break;
+                Console.WriteLine("Калькулятор калькулировал, калькулирует и сейчас тоже всё выкалькулировает");
+                while (true)
+                {
+                    number1 = ReadNumber(out var isSuccess);
+                    if (isSuccess) break;
+                }
+
+                while (true)
+                {
+                    action = ReadAction(out var isSuccessChar);
+                    if (isSuccessChar) break;
+                }
+
+                while (true)
+                {
+                    number2 = ReadNumber(out var isSuccess2);
+                    if (isSuccess2) break;
+                }
+
+                Calc(number1, number2, action);
             }
-            for (int i = 0;; i++)
-            {
-                action = ReadAction(out var isSuccessChar);
-                if (isSuccessChar) break;
-            }
-            for (int i = 0;; i++)
-            {
-                number2 = ReadNumber(out var isSuccess2);
-                if (isSuccess2) break;
-            }
-            Calc(number1, number2, action);
         }
 
         public static double ReadNumber(out bool isSuccess)
@@ -40,7 +47,7 @@ namespace calc
             }
             else 
             {
-                Console.WriteLine("Некорректный ввод");
+                Console.WriteLine("Некорректный ввод. Повторите попытку");
                 return 0;
             }
         }
@@ -55,7 +62,7 @@ namespace calc
             }
             else 
             {
-                Console.WriteLine("Некорректный ввод");
+                Console.WriteLine("Некорректный ввод. Повторите попытку");
                 return '#';
             }
         }
