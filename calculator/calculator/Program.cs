@@ -7,59 +7,80 @@ namespace calc
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Введите первое число");
-            double number1 = 0;
-            double number2 = 0;
-            try
+            var number1 = ReadNumber(out var isSuccess);
+            if (isSuccess)
             {
-                number1 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                var action = ReadOperator(out var isSuccessChar);
+                if (isSuccessChar)
+                {
+                    var number2 = ReadNumber(out var isSuccess2);
+                    if (isSuccess2)
+                    {
+                        Calc(number1, number2, action);
+                    }
+                    else Console.WriteLine("Я упал");
+                }
+                else Console.WriteLine("Я упал");
             }
-            catch
-            {
-                Console.WriteLine("Некорректный ввод");
-                return;
-            }
+            else Console.WriteLine("Я упал");
+        }
 
-            Console.WriteLine("Введите оператор: +-/*");
-            var action = Convert.ToChar(Console.ReadLine());
-            Console.WriteLine("Введите второе число");
-            try
+        public static double ReadNumber(out bool isSuccess)
+        {
+            Console.WriteLine("Введите число");
+            var str = Console.ReadLine();
+            isSuccess = double.TryParse(str, out var number);
+            if (isSuccess)
             {
-                number2 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                return number;
             }
-            catch
+            else 
             {
                 Console.WriteLine("Некорректный ввод");
-                return;
+                return 0;
             }
+        }
+            public static char ReadOperator(out bool isSuccess)
+        {
+            Console.WriteLine("Введите оператор: +-/*");
+            var str = Console.ReadLine();
+            isSuccess = char.TryParse(str, out var action)&& (action == '+' || action == '-' || action == '/' || action == '*');
+            if (isSuccess)
+            {
+                return action;
+            }
+            else 
+            {
+                Console.WriteLine("Некорректный ввод");
+                return '#';
+            }
+        }
+        public static void Calc(double number1, double number2, char action)
+        {
             if (action == '+')
             {
-                Console.WriteLine(number1 + number2);
+                Console.WriteLine("Результат: " + (number1 + number2));
             }
             else if (action == '-')
             {
-                Console.WriteLine(number1 - number2);
+                Console.WriteLine("Результат: " + (number1 - number2));
             }
-          
             else if (action == '*')
             {
-                Console.WriteLine(number1 * number2);
+                Console.WriteLine("Результат: " + number1 * number2);
             }
-            
-            else if (action == '/' && number2!= 0)
+            else if (action == '/')
             {
-                Console.WriteLine(number1 / number2);
+                try
+                {
+                    Console.WriteLine("Результат: " + number1 / number2);
+                }
+                catch
+                {
+                    Console.WriteLine("Нельзя делить на ноль");
+                }
             }
-            
-            else if (action == '/' && number2 == 0)
-            {
-                Console.WriteLine("Нельзя делить на 0");
-            }
-            
-            else 
-            {
-                Console.WriteLine("Неизвестный оператор");
-            }
+            else Console.WriteLine("Я упал");
         }
     }
 }

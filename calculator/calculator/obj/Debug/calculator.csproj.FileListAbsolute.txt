@@ -1,0 +1,7 @@
+C:\Users\pavlova_pn\Desktop\calc\calculator\calculator\calculator\obj\Debug\calculator.csproj.AssemblyReference.cache
+C:\Users\pavlova_pn\Desktop\calc\calculator\calculator\calculator\obj\Debug\calculator.csproj.SuggestedBindingRedirects.cache
+C:\Users\pavlova_pn\Desktop\calc\calculator\calculator\calculator\obj\Debug\calculator.csproj.CoreCompileInputs.cache
+C:\Users\pavlova_pn\Desktop\calc\calculator\calculator\calculator\bin\Debug\calculator.exe
+C:\Users\pavlova_pn\Desktop\calc\calculator\calculator\calculator\bin\Debug\calculator.pdb
+C:\Users\pavlova_pn\Desktop\calc\calculator\calculator\calculator\obj\Debug\calculator.exe
+C:\Users\pavlova_pn\Desktop\calc\calculator\calculator\calculator\obj\Debug\calculator.pdb
