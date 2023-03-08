@@ -7,64 +7,42 @@ namespace calc
     {
         public static void Main(string[] args)
         {
-            double number1;
-            double number2;
+            double num1;
+            double num2;
             char action;
 
             while (true)
             {
-                Console.WriteLine("Калькулятор калькулировал, калькулирует и сейчас тоже всё выкалькулировает");
-                while (true)
+                while (!ReadNumberNewTopMethod(out num1))
                 {
-                    number1 = ReadNumber(out var isSuccess);
-                    if (isSuccess) break;
+                    Console.WriteLine("Некорректный ввод. Повторите попытку");
                 }
 
-                while (true)
+                while (!ReadAction(out action))
                 {
-                    action = ReadAction(out var isSuccessChar);
-                    if (isSuccessChar) break;
+                    Console.WriteLine("Некорректный ввод. Повторите попытку");
                 }
 
-                while (true)
+                while (!ReadNumberNewTopMethod(out num2))
                 {
-                    number2 = ReadNumber(out var isSuccess2);
-                    if (isSuccess2) break;
+                    Console.WriteLine("Некорректный ввод. Повторите попытку");
                 }
-
-                Calc(number1, number2, action);
+                Calc(num1, num2, action);
             }
         }
 
-        public static double ReadNumber(out bool isSuccess)
+        private static bool ReadNumberNewTopMethod(out double number)
         {
             Console.WriteLine("Введите число");
             var str = Console.ReadLine();
-            isSuccess = double.TryParse(str, out var number);
-            if (isSuccess)
-            {
-                return number;
-            }
-            else 
-            {
-                Console.WriteLine("Некорректный ввод. Повторите попытку");
-                return 0;
-            }
+            return double.TryParse(str, NumberStyles.Any, NumberFormatInfo.InvariantInfo, out number);
         }
-            public static char ReadAction(out bool isSuccess)
+        
+        private static bool ReadAction(out char action)
         {
             Console.WriteLine("Введите оператор: +-/*");
             var str = Console.ReadLine();
-            isSuccess = char.TryParse(str, out var action)&& (action == '+' || action == '-' || action == '/' || action == '*');
-            if (isSuccess)
-            {
-                return action;
-            }
-            else 
-            {
-                Console.WriteLine("Некорректный ввод. Повторите попытку");
-                return '#';
-            }
+            return char.TryParse(str, out action) && (action == '+' || action == '-' || action == '/' || action == '*');
         }
         public static void Calc(double number1, double number2, char action)
         {
